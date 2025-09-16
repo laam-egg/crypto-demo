@@ -1,5 +1,6 @@
 *.bin
-*.txt
+plaintext.txt
+decrypted.txt
 *.pem
 *.enc
 *.sig
