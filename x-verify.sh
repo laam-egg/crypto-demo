@@ -9,23 +9,26 @@ fi
 PASSWORD="$1"
 PLAINTEXT="$2"
 SIGFILE="$3"
-DECRYPTED_HASH="decrypted_hash.bin"
-PLAINTEXT_HASH="plaintext_hash.bin"
 
-echo "[*] Decrypting signature with AES-256-CBC ..."
-openssl enc -d -aes-256-cbc -pbkdf2 \
-  -in "$SIGFILE" -out "$DECRYPTED_HASH" -k "$PASSWORD"
+echo "[*] Computing SHA256 of $PLAINTEXT..."
+SHA256_HEX=$(openssl dgst -sha256 -hex "$PLAINTEXT" | awk '{print $2}')
+echo "[+] SHA256 (plaintext): $SHA256_HEX"
 
-echo "[*] Computing SHA256 of $PLAINTEXT ..."
-openssl dgst -sha256 -binary "$PLAINTEXT" > "$PLAINTEXT_HASH"
-echo "[+] SHA256 (hex): $(openssl dgst -sha256 "$PLAINTEXT" | awk '{print $2}')"
+echo "[*] Deriving AES key and IV from password..."
+KEY=$(echo -n "$PASSWORD" | openssl dgst -sha256 -binary | xxd -p -c 256)
+IV=$(echo -n "$PASSWORD" | openssl dgst -md5 -binary | xxd -p -c 256)
 
-echo "[*] Comparing hashes ..."
-if cmp -s "$DECRYPTED_HASH" "$PLAINTEXT_HASH"; then
+echo "[*] Decrypting signature..."
+openssl enc -d -aes-256-cbc -K "$KEY" -iv "$IV" -in "$SIGFILE" -out digest_dec.bin
+
+SIG_HEX=$(xxd -p digest_dec.bin | tr -d '\n')
+rm -f digest_dec.bin
+echo "[+] SHA256 (from signature): $SIG_HEX"
+
+echo "[*] Comparing..."
+if [ "$SHA256_HEX" = "$SIG_HEX" ]; then
   echo "[✓] Verification success: signature matches file."
 else
-  echo "[✗] Verification failed: signature does NOT match."
+  echo "[✗] Verification failed!"
+  exit 1
 fi
-
-# Clean up temporary hashes
-rm -f "$DECRYPTED_HASH" "$PLAINTEXT_HASH"

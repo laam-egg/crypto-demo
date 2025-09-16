@@ -1,5 +1,11 @@
-# Private key
-openssl ecparam -name prime256v1 -genkey -noout -out ecc_private.pem
+#!/bin/bash
+set -e
 
-# Public key
-openssl ec -in ecc_private.pem -pubout -out ecc_public.pem
+# Generate 2048-bit RSA keypair
+echo "[*] Generating RSA private key..."
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out rsa_private.pem
+
+echo "[*] Extracting RSA public key..."
+openssl rsa -in rsa_private.pem -pubout -out rsa_public.pem
+
+echo "[+] Done. Keys saved as rsa_private.pem and rsa_public.pem"
