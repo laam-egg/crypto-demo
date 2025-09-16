@@ -1,0 +1,6 @@
+*.bin
+*.txt
+*.pem
+*.enc
+*.sig
+*.sha256
