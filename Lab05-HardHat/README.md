@@ -1,4 +1,4 @@
-# Lab 04: HardHat Tutorial
+# Lab 05: HardHat Tutorial
 
 ## Đề bài
 
@@ -17,7 +17,7 @@ Bài tập được thực hành trên hệ điều hành Ubuntu 22.04 (Linux Mi
 ### Setup & Run
 
 ```sh
-cd Lab04-Hardhat/hardhat-tutorial
+cd Lab05-Hardhat/hardhat-tutorial
 npm install
 npx hardhat compile
 npx hardhat test
