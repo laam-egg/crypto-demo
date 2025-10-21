@@ -8,6 +8,7 @@
 ## Setup
 
 ```sh
-cd Lab06-ERC20-on-Hardhat/hh
+cd Lab06-ERC20-on-Hardhat
+cd hh
 npm i
 ```
