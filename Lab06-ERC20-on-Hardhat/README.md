@@ -12,3 +12,7 @@ cd Lab06-ERC20-on-Hardhat
 cd hh
 npm i
 ```
+
+## Web 3 Frontend
+
+[See here](./frontend/README.md)
