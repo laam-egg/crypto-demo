@@ -4,6 +4,8 @@ import { ethers } from "ethers";
 import ApproveTable from "./components/ApproveTable";
 import MyToken from "../../hh/artifacts/contracts/LAM_Token.sol/LAM_Token.json";
 import TransferHistory from "./components/TransferHistory";
+import BuyToken from "./components/BuyToken";
+import ApproveSale from "./components/ApproveSale";
 
 const { Title } = Typography;
 
@@ -11,6 +13,12 @@ const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS;
 
 if (!CONTRACT_ADDRESS) {
   throw new Error("Please set VITE_CONTRACT_ADDRESS in your .env file");
+}
+
+const SALE_ADDRESS = import.meta.env.VITE_SALE_ADDRESS;
+
+if (!SALE_ADDRESS) {
+  throw new Error("Please set VITE_SALE_ADDRESS in your .env file");
 }
 
 export default function App() {
@@ -170,6 +178,10 @@ export default function App() {
       {contract && userAddress && (
         <TransferHistory contract={contract} userAddress={userAddress} />
       )}
+
+      <ApproveSale tokenAddress={CONTRACT_ADDRESS} saleAddress={SALE_ADDRESS} />
+      <div style={{ marginTop: 20 }} />
+      <BuyToken saleAddress={SALE_ADDRESS} tokenAddress={CONTRACT_ADDRESS} tokenDecimal={decimals} />
     </div>
   );
 }

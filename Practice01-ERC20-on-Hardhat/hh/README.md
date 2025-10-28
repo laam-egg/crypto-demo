@@ -1,13 +1,20 @@
-# Sample Hardhat Project
+# Hardhat Network
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+## Setup
 
-Try running some of the following tasks:
+### Dependencies
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
+```sh
+npm i
 ```
+
+### Environment Variables
+
+(after running node and deploying contracts)
+
+```sh
+cp .env.example .env
+```
+
+then edit `.env` to add your deployed contract address
+and set other variables if needed.
