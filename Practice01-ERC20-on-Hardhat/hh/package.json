@@ -1,0 +1,22 @@
+{
+  "name": "hh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Vũ Tùng Lâm 22028235",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "dotenv": "^17.2.3",
+    "hardhat": "^2.26.3"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.6",
+    "ethers": "^5.8.0"
+  }
+}
