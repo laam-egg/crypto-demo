@@ -3,6 +3,7 @@ import { Button, Input, Typography, message, Card } from "antd";
 import { ethers } from "ethers";
 import ApproveTable from "./components/ApproveTable";
 import MyToken from "../../hh/artifacts/contracts/LAM_Token.sol/LAM_Token.json";
+import TransferHistory from "./components/TransferHistory";
 
 const { Title } = Typography;
 
@@ -161,7 +162,14 @@ export default function App() {
         )}
       </Card>
 
-      <ApproveTable approvals={approvals} />
+      {/* <ApproveTable approvals={approvals} /> */}
+      {contract && userAddress && (
+        <ApproveTable contract={contract} userAddress={userAddress} />
+      )}
+
+      {contract && userAddress && (
+        <TransferHistory contract={contract} userAddress={userAddress} />
+      )}
     </div>
   );
 }
